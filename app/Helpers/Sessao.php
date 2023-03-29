@@ -46,22 +46,16 @@ class Sessao
             endif;
         endif;
     }
-    public static function restrito(){
-        if(!isset($_SESSION['usuario_id'])):
+    public static function session(){
+        if(isset($_SESSION['usuarioJB_id'])):
             return true;
         else:
             return false;    
         endif;
     }
-    public static function restrict(){
-        if(!isset($_SESSION['usuarios_id'])):
-            return true;
-        else:
-            return false;    
-        endif;
-    }
-    public static function restrito1($id){
-        if($id!=$_SESSION['usuario_id']):
+   
+    public static function session_id($id){
+        if($id!=$_SESSION['usuarioJB_id']):
             return true;
         else:
             return false;    

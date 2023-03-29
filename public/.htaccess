@@ -1,6 +1,6 @@
 RewriteEngine On
 Options -Multiviews
-RewriteBase /Refeitorio/public
+RewriteBase /JornalB/public
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-l

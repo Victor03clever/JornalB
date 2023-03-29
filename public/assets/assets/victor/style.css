@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: normal 20pt Arial;
+   
+    background-color: rgba(8, 4, 46, 0.767);
+}
+h1{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+.ityped{
+    color: rgba(0, 119, 255, 0.418);
+}

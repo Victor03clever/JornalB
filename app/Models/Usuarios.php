@@ -10,41 +10,16 @@ class Usuarios {
     {
        $this->db = new Conexao();
     }
-    public function checaemail(string $email){
-        $this->db->query("SELECT email FROM usuarios WHERE email=:e");
-        $this->db->bind(':e',$email,"");
-        $this->db->executa();
-        if($this->db->executa() AND $this->db->total()):
-            return true;
-        else:
-            return false;
-        endif;
-    }
-    public function armazena(Array $data){
-        $this->db->query("INSERT INTO usuarios(nome, email, senha, data_nascimento) VALUES(:nome, :email, :senha, :datta)");
-        
-        $this->db->bind(':nome', $data['nome'],"");
-        $this->db->bind(':email', $data['email'], "");
-        $this->db->bind(':senha', $data['senha'], "");
-        $this->db->bind(':datta', $data['data'], "");
-
-
-        if ($this->db->executa()) {
-            return true;
-        }
-        else{ 
-            return false;
-        }
-    }
-
-    public function checalogin($email,$senha,$nivel){
-        $this->db->query("SELECT * FROM usuarios WHERE email=:e");
-        $this->db->bind(':e',$email,"");
+    
+   
+    public function checalogin($data){
+        $this->db->query("SELECT * FROM user WHERE nome=:nome");
+        $this->db->bind(':nome',$data['username']);
         $this->db->executa();
         if($this->db->executa() AND $this->db->total()):
             $resultado=$this->db->resultado();
         
-                 if (password_verify($senha, $resultado['senha']) AND $resultado['nivel']==$nivel) :
+                 if (password_verify($data['password'], $resultado['senha'])) :
                     return $resultado;
                 else:
                     return false;
@@ -53,5 +28,36 @@ class Usuarios {
         else:
             return false;
         endif;
+    }
+    public function usuarioRead($id)
+    {
+        $this->db->query("SELECT * FROM user WHERE id=:id");
+        $this->db->bind(':id', $id);
+        $this->db->executa();
+        if ($this->db->executa() and $this->db->total()) :
+           return $this->db->resultado();
+        endif;
+    }
+    public function newpass($data, int $id)
+    {
+        $this->db->query("UPDATE user SET senha=:senha WHERE id=:id");
+        $this->db->bind(':senha',$data['novasenha']);
+        $this->db->bind(':id',$id);
+        if ($this->db->executa() AND $this->db->total()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function newname($data, int $id)
+    {
+        $this->db->query("UPDATE user SET nome=:nome WHERE id=:id");
+        $this->db->bind(':nome',$data['nome']);
+        $this->db->bind(':id',$id);
+        if ($this->db->executa() AND $this->db->total()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
