@@ -23,7 +23,6 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
         </nav>
     </div><!-- End Page Title -->
 <?=Sessao::sms("noticia")?>
-<?=Sessao::sms("aviso")?>
     <div class="container">
         <form action="<?=URL?>/admin/newNews" enctype="multipart/form-data" method="post">
             <p>

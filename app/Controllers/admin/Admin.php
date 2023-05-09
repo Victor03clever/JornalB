@@ -443,7 +443,7 @@ class Admin extends Controller
                     if ($save) {
                         unset($_SESSION['path']);
                         Sessao::sms("noticia", "Aviso criado com sucesso");
-                        // Url::redireciona("admin/home");
+                        Url::redireciona("admin/news");
                     } else {
                         Sessao::sms("noticia", "Aviso nao criado com sucesso", "alert alert-danger");
                     }
@@ -477,7 +477,7 @@ class Admin extends Controller
             if ($_POST['btn']) {
                 $delete = $this->News->deleteNews($id);
                 if ($delete) {
-                    Sessao::sms("aviso", "Noticia deletado com sucesso");
+                    Sessao::sms("noticia", "Noticia deletado com sucesso");
                     Url::redireciona("admin/news");
                     exit;
                 } else {
