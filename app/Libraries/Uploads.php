@@ -38,7 +38,7 @@ class uploads
             // var_dump(strtolower($extensao));
             if(!in_array(strtolower($extensao),$extensoesValidas)):
     
-                $this->erro="ext INVALIDO";
+                $this->erro="extensão Invalida";
                 $this->exito=false;
             elseif(!in_array(strtolower($this->arquivo['type']),$tiposValidas)):
                 $this->erro="Tipo invalido";
@@ -74,6 +74,7 @@ class uploads
         if(move_uploaded_file($this->arquivo['tmp_name'],$this->diretorio.DIRECTORY_SEPARATOR.$this->pasta.DIRECTORY_SEPARATOR.$this->nome)):
             $this->exito= $this->nome;
             $this->erro=false;
+            $_SESSION['path']=$this->diretorio.DIRECTORY_SEPARATOR.$this->pasta.DIRECTORY_SEPARATOR.$this->nome;
         else:
             $this->exito=false;
             $this->erro="Erro ao mover a imagem";

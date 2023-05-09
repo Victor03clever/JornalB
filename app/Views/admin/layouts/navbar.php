@@ -1,4 +1,5 @@
 <?php
+
 use App\Helpers\Go;
 
 
@@ -14,23 +15,24 @@ use App\Helpers\Go;
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-   <!-- icons do jornal -->
-   <link href="<?=Go::getPublic("assets/img/mm.jpg")?>" rel="icon">
-    <link href="<?=Go::getPublic("assets/img/mm.jpg")?>" rel="mm-icon">
-  
+  <!-- icons do jornal -->
+  <link href="<?= Go::getPublic("assets/img/mm.jpg") ?>" rel="icon">
+  <link href="<?= Go::getPublic("assets/img/mm.jpg") ?>" rel="mm-icon">
 
+
+  
   <!-- Vendor CSS Files -->
-  <link href=" <?=Go::getPublic("assets/assets/vendor/bootstrap/css/bootstrap.min.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/bootstrap-icons/bootstrap-icons.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/boxicons/css/boxicons.min.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/quill/quill.snow.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/quill/quill.bubble.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/remixicon/remixicon.css")?>" rel="stylesheet">
-  <link href=" <?=Go::getPublic("assets/assets/vendor/simple-datatables/style.css")?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/bootstrap/css/bootstrap.min.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/bootstrap-icons/bootstrap-icons.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/boxicons/css/boxicons.min.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/quill/quill.snow.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/quill/quill.bubble.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/remixicon/remixicon.css") ?>" rel="stylesheet">
+  <link href=" <?= Go::getPublic("assets/assets/vendor/simple-datatables/style.css") ?>" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href=" <?=Go::getPublic("assets/assets/css/style.css")?>" rel="stylesheet">
-  
+  <link href=" <?= Go::getPublic("assets/assets/css/style.css") ?>" rel="stylesheet">
+
 </head>
 
 <body>
@@ -62,9 +64,9 @@ use App\Helpers\Go;
           </a>
         </li><!-- End Search Icon-->
 
-    
+        <a href="<?= URL ?>" class="btn btn-primary rounded" target="__blank">Jornal</a>
 
-        
+
 
         <li class="nav-item dropdown pe-3">
 
@@ -74,7 +76,7 @@ use App\Helpers\Go;
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Nome do admin</h6>
+              <h6><?= $_SESSION['usuarioJB_nome'] ?></h6>
               <span>Admin</span>
             </li>
             <li>
@@ -102,7 +104,7 @@ use App\Helpers\Go;
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -117,22 +119,22 @@ use App\Helpers\Go;
   </header><!-- End Header -->
 
 
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog        ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Deseja sair?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-sm"><a class=" text-decoration-none text-white" href="<?=URL?>/admin/sair">Sair</a></button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          Deseja sair?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-sm"><a class=" text-decoration-none text-white" href="<?= URL ?>/admin/sair">Sair</a></button>
+        </div>
+      </div>
     </div>
   </div>

@@ -11,7 +11,7 @@ class Events extends Controller
     public function index(){
         
         
-    $this->view('events',compact('page'));
+    $this->view('pricings',compact('page'));
         
     }
 }

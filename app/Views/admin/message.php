@@ -28,10 +28,10 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h1 class="h3 "><?=$see['assunto']?></h1>
+                        <h4 class="h3"><?=$see['nome']?></h4>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title"><?=$see['nome']?></h4>
+                        <h1 class="card-title "><?=$see['assunto']?></h1>
                         <p class="card-text"><?=$see['mensagem']?></p>
                     </div>
                     <hr>

@@ -2,6 +2,28 @@
 <?php
     require_once NAVBAR;
 ?>
+<style>
+@media(max-width:426px){
+h2.mb-2.h6.font-weight-bold{
+
+    width: calc(426px - 200px);
+}
+#destaque{
+    display: block;
+    width: 100%;
+}
+}
+@media(max-width:321px){
+h2.mb-2.h6.font-weight-bold{
+
+    width: calc(426px - 250px);
+}
+#destaque{
+    display: block;
+    width: 100%;
+}
+}
+</style>
     <!-- ======= Seleção do estilo principal ======= -->
     <section id="hero" class="d-flex justify-content-center align-items-center">
         <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
@@ -25,7 +47,7 @@
                             <img height="80" src="./assets/img/OIP.jpg">
                             <div class="pl-3">
                                 <h2 class="mb-2 h6 font-weight-bold">
-                                    <a class="text-dark" href="<?=URL?>/events">Angola é um dos países mais ricos de África</a>
+                                    <a id="destaque" class="text-dark" href="<?=URL?>/events">Angola é um dos países mais ricos de África</a>
                                 </h2>
                                 <div class="card-text text-muted small">
                                     Notícias
@@ -37,7 +59,7 @@
                             <img height="80" src="./assets/img/R (1).jpg">
                             <div class="pl-3">
                                 <h2 class="mb-2 h6 font-weight-bold">
-                                    <a class="text-dark" href="<?=URL?>/events">Tem disponível vagas para a Angosat. Técnicos de redes estão preparados para os testes</a>
+                                    <a id="destaque" class="text-dark" href="<?=URL?>/events">Tem disponível vagas para a Angosat. Técnicos de redes estão preparados para os testes</a>
                                 </h2>
                                 <div class="card-text text-muted small">
                                     Notícias
@@ -49,7 +71,7 @@
                             <img height="80" src="./assets/img/R (3).jpg">
                             <div class="pl-3">
                                 <h2 class="mb-2 h6 font-weight-bold">
-                                    <a class="text-dark" href="<?=URL?>/events">As salas de aulas serão reabilitadas durate as férias</a>
+                                    <a id="destaque" class="text-dark" href="<?=URL?>/events">As salas de aulas serão reabilitadas durate as férias</a>
                                 </h2>
                                 <div class="card-text text-muted small">
                                     Notícias

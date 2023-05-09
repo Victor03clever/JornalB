@@ -17,18 +17,18 @@
      </li><!-- End Painel Principal Nav -->
 
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#estudante-nav" data-bs-toggle="collapse" href="#">
+       <a class="nav-link <?= ucwords($uri[1]) == ('News') || ucwords($uri[1]) == ('NewNews') ? '' || ucwords($uri[1]) == ('EditNews')  : 'collapsed' ?>" data-bs-target="#estudante-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-newspaper"></i>
          <span>Notícias</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="estudante-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
          <li>
-           <a href="estudante-cadastro.html">
+           <a href="<?=URL?>/admin/newNews" class="<?= ucwords($uri[1]) == 'NewNews' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Novo</span>
            </a>
          </li>
          <li>
-           <a href="estudante-lista.html">
+           <a href="<?=URL?>/admin/news"  class="<?= ucwords($uri[1]) == 'News' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Listar</span>
            </a>
          </li>
@@ -111,3 +111,4 @@
    </ul>
 
  </aside><!-- End Sidebar-->
+

@@ -6,12 +6,12 @@ use App\Helpers\Sessao;
 use App\Helpers\Url;
 use App\Libraries\Controller;
 
-class Pricing extends Controller
+class Activities extends Controller
 {
     public function index(){
         
         
-    $this->view('pricings',compact('page'));
+    $this->view('actividade',compact('page'));
         
     }
 }

@@ -6,7 +6,7 @@ use App\Helpers\Sessao;
 use App\Helpers\Url;
 use App\Libraries\Controller;
 
-class Trainers extends Controller
+class Notices extends Controller
 {
     private $Data;
     public function __construct()

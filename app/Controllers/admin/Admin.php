@@ -4,16 +4,19 @@ namespace App\Controllers\admin;
 
 use App\Helpers\Sessao;
 use App\Helpers\Url;
+use App\Libraries\uploads;
 use App\Libraries\Controller;
 
 class Admin extends Controller
 {
     private $Data;
     private $Home;
+    private $News;
     public function __construct()
     {
         $this->Data = $this->model("Usuarios");
         $this->Home = $this->model("Home");
+        $this->News = $this->model("News");
     }
     //Funcao para autenticar o administrador
     public function index()
@@ -122,6 +125,7 @@ class Admin extends Controller
         }
         $this->view('admin/message', compact('see'));
     }
+
     public function deleteMessage($id)
     {
         if (!Sessao::session()) {
@@ -363,11 +367,12 @@ class Admin extends Controller
         endif;
 
 
-        
+
         $this->view('admin/changepassword', compact('dados'));
     }
-    public function changename(){
-        $formulario=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    public function changename()
+    {
+        $formulario = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if ($formulario['btn']) {
             $dados = [
                 'nome' => trim($formulario['nome']),
@@ -380,22 +385,162 @@ class Admin extends Controller
                 }
             } else {
                 $newname = $this->Data->newname($dados, $_SESSION['usuarioJB_id']);
-                    if ($newname) :
-                        Sessao::sms('change', 'Nome actualizado com sucesso');
-                        Url::redireciona('admin/config');
-                        exit;
-                    else :
-                        Sessao::sms('change', 'Erro com a Model Usuarios->newpass', 'alert alert-danger');
-                        Url::redireciona('admin/config');
-                        exit;
-                    endif;
-
+                if ($newname) :
+                    Sessao::sms('change', 'Nome actualizado com sucesso');
+                    Url::redireciona('admin/config');
+                    exit;
+                else :
+                    Sessao::sms('change', 'Erro com a Model Usuarios->newpass', 'alert alert-danger');
+                    Url::redireciona('admin/config');
+                    exit;
+                endif;
             }
         } else {
-            $dados=['nome'=>'', 'err_nome'=>'',];
+            $dados = ['nome' => '', 'err_nome' => '',];
         }
         $this->view('admin/changepassword', compact('dados'));
+    }
+    // ============================================================
 
+    // ============================================================
+    // noticias
+
+    public function news()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $dados = $this->News->getNews();
+        $this->view('admin/news', compact('dados'));
+    }
+    public function newNews()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if ($form['not']) {
+            $dados = [
+                'title' => trim($form['title']),
+                'desc' => trim($form['desc']),
+                'img' => trim($form['img']),
+                'error' => ''
+            ];
+
+            if (in_array("", $form)) {
+                if (empty($dados['title']) || empty($dados['desc'] || empty($dados['img']))) {
+                    $dados['error'] = "Preencha todos os campos";
+                    Sessao::sms("noticia", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
+                }
+            } else {
+                if ($_FILES['img']) {
+                    $uploads = new Uploads;
+                    $uploads->imagem($_FILES['img'], 7, 'noticias');
+                }
+                if ($uploads->getexito()) {
+                    $dados['img'] = !empty($_SESSION['path']) ? $_SESSION['path'] : 'img\exemplo.png';
+                    $save = $this->News->saveNews($dados);
+                    if ($save) {
+                        unset($_SESSION['path']);
+                        Sessao::sms("noticia", "Aviso criado com sucesso");
+                        // Url::redireciona("admin/home");
+                    } else {
+                        Sessao::sms("noticia", "Aviso nao criado com sucesso", "alert alert-danger");
+                    }
+                } else {
+                    if ($uploads->geterro()) {
+
+                        Sessao::sms("noticia", $uploads->geterro(), "alert alert-danger");
+                    }
+                    Sessao::sms("noticia", "Erro", "alert alert-danger");
+                }
+            }
+        } else {
+            $dados = [
+                'title' => '',
+                'desc' => '',
+                'img' => '',
+                'error' => ''
+            ];
+        }
+
+        $this->view('admin/newNews', compact('dados'));
+    }
+    public function deleteNews($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($id and $method == "POST") {
+            if ($_POST['btn']) {
+                $delete = $this->News->deleteNews($id);
+                if ($delete) {
+                    Sessao::sms("aviso", "Noticia deletado com sucesso");
+                    Url::redireciona("admin/news");
+                    exit;
+                } else {
+                    die("Error Model");
+                }
+            } else {
+                die('No POST Method');
+            }
+        } else {
+
+            die("Invalid GET request method");
+        }
+    }
+    public function editNews($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $aviso = $this->News->getOne($id);
+        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if ($id) {
+
+            if ($form['btn']) {
+                $dados = [
+                    'title' => trim($form['title']),
+                    'desc' => trim($form['desc']),
+                    
+                    'error' => ''
+                ];
+                if (in_array("", $form)) {
+                    if (empty($dados['title']) || empty($dados['sms'])) {
+                        $dados['error'] = "Preencha todos os campos";
+                        Sessao::sms("noticia", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
+                    }
+                } else {
+                    
+                
+                        $update = $this->News->updateNews($dados, $id);
+                        if ($update) {
+                            Sessao::sms("noticia", "Noticia actualizado com sucesso");
+                            Url::redireciona("admin/news");
+                            exit;
+                        } else {
+                            Sessao::sms("noticia", "Noticia não criado com sucesso", "alert alert-danger");
+                        }
+                   
+                }
+            } else {
+                $dados = [
+                    'title' => $aviso['tema'],
+                    'desc' => $aviso['descricao'],
+                    'id' => $aviso['id'],
+                    'error' => $aviso['error']
+                ];
+            }
+        } else {
+            die('Invalid parameters');
+        }
+
+
+        $this->view("admin/editNews", compact("dados"));
     }
     // ============================================================
 }

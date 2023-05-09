@@ -2,6 +2,7 @@
  <?php 
 use App\Helpers\Go;
 ?>
+
  <footer id="footer">
 
 <div class="footer-top">
