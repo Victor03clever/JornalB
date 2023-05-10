@@ -38,7 +38,7 @@
      <li class="nav-item">
        <a class="nav-link collapsed" data-bs-target="#banca-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-layers"></i>
-         <span>Actidades</span><i class="bi bi-chevron-down ms-auto"></i>
+         <span>Actividades</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="banca-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
          <li>
@@ -57,18 +57,18 @@
      </li><!-- monografia -->
 
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#estagio-nav" data-bs-toggle="collapse" href="#">
+       <a class="nav-link <?= ucwords($uri[1]) == ('Honrados') || ucwords($uri[1]) == ('NewHonra') ? '' : 'collapsed' ?>" data-bs-target="#estagio-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-award-fill"></i>
          <span>Quadro honra</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="estagio-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
          <li>
-           <a href="estagio.html">
+           <a href="<?=URL?>/admin/newHonra" class="<?= ucwords($uri[1]) == 'NewHonra' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Novo</span>
            </a>
          </li>
          <li>
-           <a href="estagio.html">
+           <a href="<?=URL?>/admin/honrados" class="<?= ucwords($uri[1]) == 'Honrados' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Listar</span>
            </a>
          </li>

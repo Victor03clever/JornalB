@@ -178,6 +178,7 @@ h2.mb-2.h6.font-weight-bold{
                                 </div>
                             </div>
                         </div>
+                        
                     </div> <!-- fim dos item noticias -->
 
                 </div>
@@ -187,5 +188,6 @@ h2.mb-2.h6.font-weight-bold{
     </main><!-- fim #main -->
     <?php
     require_once FOOTER;
+
 ?>
    

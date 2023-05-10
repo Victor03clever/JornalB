@@ -1,5 +1,6 @@
 
 <?php
+use App\Helpers\Go;
     require_once NAVBAR;
 ?>
 
@@ -25,86 +26,30 @@
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
+          <?php 
+          if($dados):
+            foreach($dados as $key => $value):
+          ?>
+          <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">
-                  <img src="assets/img/gggg.jpg" class="testimonial-img" alt="gggg">
-                  <h3>Clever Morais Nanga</h3>
-                  <h4>MÉDIA 15,8V</h4>
+                  <img src="<?=Go::getPublic($value['path'])?>" class="testimonial-img" >
+                  <h3><?=$value['nome']?></h3>
+                  <h4>MÉDIA <?=$value['media']?></h4>
                   <p>
                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Curso técnico de informática.
-                    13ª classe
+                    <?=$value['curso']?>
                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                   </p>
                 </div>
               </div>
             </div>
             <!-- falta inserção de imagens -->
+          <?php endforeach;
+          endif;?>
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="assets/img/ffff.jpg" class="testimonial-img" alt="ffff">
-                  <h3>Victor António Lourenço</h3>
-                  <h4>MÉDIA 15,4V</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Curso técnico de informática.
-                    13ª classe
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- falta inserção de imagens -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="assets/img/kkkk.jpg" class="testimonial-img" alt="kkkk">
-                  <h3>Marizela Lourenço</h3>
-                  <h4>MÉDIA 17,2V</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Curso CEJ.
-                    11ª classe
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- falta inserção de imagens -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="assets/img/rrrr.jpg" class="testimonial-img" alt="rrrr">
-                  <h3>Larissa Patrícia</h3>
-                  <h4>MÉDIA 14V</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Curso CFB
-                    10ª classe
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div><!-- falta inserção de imagens -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="assets/img/mmrr.jpg" class="testimonial-img" alt="mmrr">
-                  <h3>Maria Jorge</h3>
-                  <h4>MÉDIA 18,6V</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Curso técnico de informática.
-                    12ª classe
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            </div>
+            
 
           </div>
           <div class="swiper-pagination"></div>

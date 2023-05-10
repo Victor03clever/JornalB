@@ -12,11 +12,13 @@ class Admin extends Controller
     private $Data;
     private $Home;
     private $News;
+    private $Honra;
     public function __construct()
     {
         $this->Data = $this->model("Usuarios");
         $this->Home = $this->model("Home");
         $this->News = $this->model("News");
+        $this->Honra = $this->model("Honra");
     }
     //Funcao para autenticar o administrador
     public function index()
@@ -506,7 +508,7 @@ class Admin extends Controller
                 $dados = [
                     'title' => trim($form['title']),
                     'desc' => trim($form['desc']),
-                    
+
                     'error' => ''
                 ];
                 if (in_array("", $form)) {
@@ -515,17 +517,16 @@ class Admin extends Controller
                         Sessao::sms("noticia", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
                     }
                 } else {
-                    
-                
-                        $update = $this->News->updateNews($dados, $id);
-                        if ($update) {
-                            Sessao::sms("noticia", "Noticia actualizado com sucesso");
-                            Url::redireciona("admin/news");
-                            exit;
-                        } else {
-                            Sessao::sms("noticia", "Noticia não criado com sucesso", "alert alert-danger");
-                        }
-                   
+
+
+                    $update = $this->News->updateNews($dados, $id);
+                    if ($update) {
+                        Sessao::sms("noticia", "Noticia actualizado com sucesso");
+                        Url::redireciona("admin/news");
+                        exit;
+                    } else {
+                        Sessao::sms("noticia", "Noticia não criado com sucesso", "alert alert-danger");
+                    }
                 }
             } else {
                 $dados = [
@@ -542,5 +543,58 @@ class Admin extends Controller
 
         $this->view("admin/editNews", compact("dados"));
     }
-    // ============================================================
+    //     // ============================================================
+    // <!-- ========== Start Quadro de honra ========== -->
+    public function newHonra()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if (isset($form['btn'])) {
+            $dados = ['nome' => trim($form['nome']), 'curso' => trim($form['curso']), 'media' => trim($form['media']), 'error' => ''];
+            if (in_array("", $form)) {
+                if (empty($dados['nome']) || empty($dados['curso'] || empty($dados['media']))) {
+                    $dados['error'] = "Preencha todos os campos";
+                    Sessao::sms("honra", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
+                }
+            } else {
+                if ($_FILES['img']) {
+                    $uploads = new Uploads;
+                    $uploads->imagem($_FILES['img'], 7, 'Honra');
+                }
+                if ($uploads->getexito()) {
+                    $dados['img'] = !empty($_SESSION['path']) ? $_SESSION['path'] : 'img\exemplo.png';
+                    $save = $this->Honra->saveHonra($dados);
+                    if ($save) {
+                        unset($_SESSION['path']);
+                        Sessao::sms("honra", "Criado com sucesso");
+                        Url::redireciona("admin/honrados");
+                    } else {
+                        Sessao::sms("honra", "Não criado com sucesso", "alert alert-danger");
+                    }
+                } else {
+                    if ($uploads->geterro()) {
+
+                        Sessao::sms("honra", $uploads->geterro(), "alert alert-danger");
+                    }
+                    Sessao::sms("honra", "Erro", "alert alert-danger");
+                }
+            }
+        } else {
+            $dados = ['nome' => '', 'curso' => '', 'media' => '', 'error' => ''];
+        }
+        $this->view("admin/newhonra", compact('dados'));
+    }
+    public function honrados()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $dados=$this->Honra->getHonrados();
+        $this->view("admin/honrados",compact('dados'));
+    }
+
+    // <!-- ========== End Quadro de honra ========== -->
 }
