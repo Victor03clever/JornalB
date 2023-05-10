@@ -36,18 +36,18 @@
      </li><!-- End estudante -->
 
      <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#banca-nav" data-bs-toggle="collapse" href="#">
+       <a class="nav-link <?= ucwords($uri[1]) == ('Activity') || ucwords($uri[1]) == ('NewActivity') ? '' : 'collapsed' ?>" data-bs-target="#banca-nav" data-bs-toggle="collapse" href="#">
          <i class="bi bi-layers"></i>
          <span>Actividades</span><i class="bi bi-chevron-down ms-auto"></i>
        </a>
        <ul id="banca-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
          <li>
-           <a href="banca-lista.html">
+           <a href="<?=URL?>/admin/NewActivity" class="<?= ucwords($uri[1]) == 'NewActivity' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Novo</span>
            </a>
          </li>
          <li>
-           <a href="banca-lista.html">
+           <a href="<?=URL?>/admin/Activities" class="<?= ucwords($uri[1]) == 'Activity' ? 'active' : '' ?>">
              <i class="bi bi-circle"></i><span>Listar</span>
            </a>
          </li>

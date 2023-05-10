@@ -179,6 +179,39 @@ require_once NAVBAR;
 
     </div>
   </section><!-- fim da seleção dos membros -->
+  <section id="testimonials" class="testimonials">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Cursos</h2>
+        <p>OS CURSOS MINISTRADOS</p>
+      </div>
+      <section id="about" class="about p-0">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+      
+        <div class="col-lg-6 0 order-2 order-lg-1 content">
+          
+          <ul>
+            <li><i class="bi bi-check-circle"></i> Técnico de Informática.</li>
+            <li><i class="bi bi-check-circle"></i> Gestão de sistemas de informáticos.</li>
+            <li><i class="bi bi-check-circle"></i> Desenhadores projectistas.</li>
+            <li><i class="bi bi-check-circle"></i> Contabilidade.</li>
+            <li><i class="bi bi-check-circle"></i> Direito.</li>
+          </ul>
+          <p>
+            Garantimos a melhor qualidade de ensino e educação para o seu educando.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+          
+    </div>
+  </section>
 
 </main><!-- fim #main -->
 

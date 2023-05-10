@@ -13,12 +13,14 @@ class Admin extends Controller
     private $Home;
     private $News;
     private $Honra;
+    private $Activity;
     public function __construct()
     {
         $this->Data = $this->model("Usuarios");
         $this->Home = $this->model("Home");
         $this->News = $this->model("News");
         $this->Honra = $this->model("Honra");
+        $this->Activity = $this->model("Activity");
     }
     //Funcao para autenticar o administrador
     public function index()
@@ -571,6 +573,7 @@ class Admin extends Controller
                         unset($_SESSION['path']);
                         Sessao::sms("honra", "Criado com sucesso");
                         Url::redireciona("admin/honrados");
+                        exit;
                     } else {
                         Sessao::sms("honra", "Não criado com sucesso", "alert alert-danger");
                     }
@@ -592,9 +595,170 @@ class Admin extends Controller
         if (!Sessao::session()) {
             Url::redireciona("admin");
         }
-        $dados=$this->Honra->getHonrados();
-        $this->view("admin/honrados",compact('dados'));
+        $dados = $this->Honra->getHonrados();
+        $this->view("admin/honrados", compact('dados'));
+    }
+    public function seeHonra($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $Honra = $this->Honra->getOne($id);
+        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if ($id) {
+
+            if (isset($form['btn'])) {
+                $dados = ['nome' => trim($form['nome']), 'curso' => trim($form['curso']), 'media' => trim($form['media']), 'error' => ''];
+                if (in_array("", $form)) {
+                    if (empty($dados['nome']) || empty($dados['curso'] || empty($dados['media']))) {
+                        $dados['error'] = "Preencha todos os campos";
+                        Sessao::sms("honra", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
+                    }
+                } else {
+                    $update = $this->Honra->updateHonra($dados, $id);
+                    if ($update) {
+                        // unset($_SESSION['path']);
+                        Sessao::sms("honra", "Actualizado com sucesso");
+                        Url::redireciona("admin/honrados");
+                        exit;
+                    } else {
+                        Sessao::sms("honra", "Não criado com sucesso", "alert alert-danger");
+                    }
+                }
+            } else {
+                $dados = ['nome' => $Honra['nome'], 'curso' => $Honra['curso'], 'media' => $Honra['media'], 'error' => ''];
+            }
+        } else {
+            die('Invalid parameters');
+        }
+
+        $this->view("admin/viewHonrados", compact('dados', 'id'));
+    }
+    public function deleteHonra($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($id and $method == "POST") {
+            if ($_POST['delete']) {
+                $delete = $this->Honra->deleteHonra($id);
+                if ($delete) {
+                    Sessao::sms("honra", "deletada com sucesso");
+                    Url::redireciona("admin/honrados");
+                    exit;
+                } else {
+                    die("Error Model");
+                }
+            } else {
+                die('You didnt click in button');
+            }
+        } else {
+
+            die("Invalid GET request method");
+        }
     }
 
     // <!-- ========== End Quadro de honra ========== -->
+    // <!-- ========== Start Actividades ========== -->
+    public function newActivity()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $form = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if (isset($form['save'])) {
+            $dados = ['tema' => trim($form['tema']), 'sub' => trim($form['sub']), 'cont' => trim($form['cont']), 'org' => trim($form['org']), 'error' => ''];
+            if (in_array("", $form)) {
+                if (empty($dados['tema']) || empty($dados['sub']) || empty($dados['cont']) || empty($dados['org'])) {
+                    $dados['error'] = "Preencha todos os campos";
+                    Sessao::sms("act", "Alerta: *Não deixe nunhum campo vazio", "alert alert-info");
+                }
+            } else {
+                if ($_FILES['img']) {
+                    $uploads = new Uploads;
+                    $uploads->imagem($_FILES['img'], 7, 'Honra');
+                }
+                if ($uploads->getexito()) {
+                    $dados['img'] = !empty($_SESSION['path']) ? $_SESSION['path'] : 'img\exemplo.png';
+                    $save = $this->Activity->saveAct($dados);
+                    if ($save) {
+                        unset($_SESSION['path']);
+                        Sessao::sms("act", "Actividade Criado com sucesso");
+                        Url::redireciona("admin/activities");
+                        exit;
+                    } else {
+                        Sessao::sms("act", "Não criado com sucesso", "alert alert-danger");
+                    }
+                } else {
+                    if ($uploads->geterro()) {
+
+                        Sessao::sms("act", $uploads->geterro(), "alert alert-danger");
+                    }
+                    Sessao::sms("act", "Erro", "alert alert-danger");
+                }
+            }
+        } else {
+            $dados = ['tema' => '', 'sub' => '', 'cont' => '', 'org', 'error' => ''];
+        }
+        $this->view("admin/newActivity", compact('dados'));
+    }
+    public function Activities()
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $dados = $this->Activity->getAct();
+        
+        $this->view("admin/activities", compact('dados'));
+    }
+    public function seeActivity($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        if ($id) {
+            $see = $this->Activity->getOne($id);
+            
+            if ($see) {
+
+            } else {
+                die("Problem with message");
+            }
+        } else {
+            die('error');
+        }
+        $this->view('admin/seeActivity', compact('see'));
+    }
+    public function deleteActivity($id)
+    {
+        if (!Sessao::session()) {
+            Url::redireciona("admin");
+        }
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+        $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($id and $method == "POST") {
+            if ($_POST['delete']) {
+                $delete = $this->Activity->deleteAct($id);
+                if ($delete) {
+                    Sessao::sms("act", "deletada com sucesso");
+                    Url::redireciona("admin/activities");
+                    exit;
+                } else {
+                    die("Error Model");
+                }
+            } else {
+                die('You didnt click in button');
+            }
+        } else {
+
+            die("Invalid GET request method");
+        }
+    }
+
+    // <!-- ========== End Actividades ========== -->
 }

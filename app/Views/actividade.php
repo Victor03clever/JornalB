@@ -1,4 +1,5 @@
 <?php
+use App\Helpers\Go;
     require_once NAVBAR;
 ?>
 
@@ -18,49 +19,28 @@
 
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="course-item">
-              <img src="assets/img/R.jpg" class="img-fluid" alt="..." height="500">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Festival dos caloiros</h4>
-                  
-                </div>
-
-                <h3>Realizar-se-a no dia 5 de Março</h3>
-                <p>O Festival será cá na instituição, com a participação de alguns famosos teremos música, entertenimento, poesia alusivo ao mês da mulher e muito mais...</p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/.jpg" class="img-fluid" alt="">
-                    <span>Adilson</span>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;ORGANIZADOR
-                    
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- fim da Seleção das Atividades escolares -->
                 
           
+          <?php 
+          if($dados):
+            foreach($dados as $key=>$value):
+          ?>
           <!-- item das Atividades escolares -->
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
             <div class="course-item">
-              <img src="assets/img/R (4).jpg" class="img-fluid" alt="..." >
+              <img src="<?=Go::getPublic($value['img'])?>" class="img-fluid" alt="..." >
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Visita ao museu das forças armadas</h4>
+                  <h4><?=$value['tema']?></h4>
                  
                 </div>
 
-                <h3>Realizar-se-a no dia 11 de Junho</h3>
-                <p>Teremos um retiro para o museu das forças armadas, esperemos a organização dos alunos, devem acompanhar-se com o valor de 1500kz cada alunos para o retiro. terão direito ao farnel.</p>
+                <h3><?=$value['subtema']?></h3>
+                <p><?=$value['descricao']?></p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/.jpg" class="img-fluid" alt="">
-                    <span>Tia Maria</span>
+                    <span><?=$value['organizador']?></span>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">
                     <i class="bx bx-user"></i>&nbsp;ORGANIZADOR
@@ -71,32 +51,11 @@
               </div>
             </div>
           </div> <!-- fim dos item das Atividades escolares -->
+          <?php endforeach;
+          endif;
+          ?>
 
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="course-item">
-              <img src="assets/img/OIP (8).jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Campeonato de futebol</h4> 
-                </div>
-
-                <h3>Realizar-se-a no dia 2 de Agosto e terminará no dia 17 do mesmo mês.</h3>
-                <p>O campeonato terá abertura no campo do colégio, com as devidas prevenções.
-                </p>
-                <div class="trainer d-flex justify-content-between align-items-center">
-                  <div class="trainer-profile d-flex align-items-center">
-                    <img src="assets/img/trainers/.jpg" class="img-fluid" alt="">
-                    <span>Josué</span>
-                  </div>
-                  <div class="trainer-rank d-flex align-items-center">
-                    <i class="bx bx-user"></i>&nbsp;ORGANIZADOR
-                  
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- fim dos item das Atividades escolares -->
+          
 
         </div>
 

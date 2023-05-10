@@ -14,28 +14,33 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
 
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Novo</h1>
+        <h1>Nova Actividade</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= URL ?>/admin">Home</a></li>
-                <li class="breadcrumb-item active">Quadro de honra</li>
+                <li class="breadcrumb-item active">Actividades</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
-<?=Sessao::sms("honra")?>
+<?=Sessao::sms("act")?>
     <div class="container">
-        <form action="<?=URL?>/admin/newHonra" enctype="multipart/form-data" method="post">
+        <form action="<?=URL?>/admin/newActivity" enctype="multipart/form-data" method="post">
             <p>
-                <label for="title">Nome: </label>
-                <input type="text" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="nome" id="title">
+                <label for="title">Tema: </label>
+                <input type="text" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="tema" id="title">
             </p>
             <p>
-                <label for="title">Curso: </label>
-                <input type="text" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="curso" id="title">
+                <label for="title">Subtema: </label>
+                <input type="text" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="sub" id="sub">
             </p>
             <p>
-                <label for="title">Média: </label>
-                <input type="number" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="media" id="title">
+                <label for="desc">Contexto: </label>
+                <textarea name="cont" id="desc" cols="30" rows="5" class="form-control <?= $dados['error']? 'is-invalid':'' ?>"></textarea>
+                
+            </p>
+            <p>
+                <label for="title">Organizador (a): </label>
+                <input type="text" class="form-control <?= $dados['error']? 'is-invalid':'' ?>" name="org" id="title">
             </p>
             <p>
                 <label for="img">imagem de capa: </label>
@@ -46,7 +51,7 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
             </p>
            
             <p>
-                <button class="btn btn-primary btn-xl" type='submit' name='btn' value='submit'> Salvar</button>
+                <button class="btn btn-primary btn-xl" type='submit' name='save' value='submit'> Salvar</button>
             </p>
         </form>
     </div>

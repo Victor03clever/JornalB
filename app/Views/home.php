@@ -29,7 +29,7 @@ h2.mb-2.h6.font-weight-bold{
         <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
             <h1><br>JORNAL ONLINE-BETÂNIA</h1>
             <h2>Todas as notícias do BETÂNIA encontrarás aqui!</h2>
-            <a href="<?=URL?>/events" class="btn-get-started">Ver todas as notícias</a>
+            <a href="<?=URL?>/news" class="btn-get-started">Ver todas as notícias</a>
         </div>
     </section><!-- fim da Seleção do estilo principal -->
 
