@@ -38,18 +38,17 @@ use App\Helpers\ResumirTexto;
               </div>
             </div>
             <script>
-              var resumido = document.querySelector('#resumido<?= $i ?>');
-              var completo = document.querySelector('#completo<?= $i ?>');
-
               function seeMore<?= $i ?>() {
+                let resumido = document.querySelector('#resumido<?= $i ?>');
+                let completo = document.querySelector('#completo<?= $i ?>');
                 completo.classList.remove('d-none');
                 resumido.classList.add('d-none');
                 // console.log(resumido);
               }
 
               function seeLess<?= $i ?>() {
-                // let resumido = document.querySelector('#resumido<?= $i ?>');
-                // let completo = document.querySelector('#completo<?= $i ?>');
+                let resumido = document.querySelector('#resumido<?= $i ?>');
+                let completo = document.querySelector('#completo<?= $i ?>');
                 completo.classList.add('d-none');
                 resumido.classList.remove('d-none');
                 // console.log(resumido);

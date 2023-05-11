@@ -24,16 +24,16 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
         </nav>
     </div><!-- End Page Title -->
     <?= Sessao::sms('noticia') ?>
-<a href="<?=URL?>/news" target="__blank" class="btn btn-primary mb-3"> Ver</a>
+    <a href="<?= URL ?>/news" target="__blank" class="btn btn-primary mb-3"> Ver</a>
     <div class="row">
 
 
         <?php
-        if ($dados) :$i=0;
+        if ($dados) : $i = 0;
             foreach ($dados as $key => $value) :
-                $i+=1;
+                $i += 1;
         ?>
-                
+
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                     <div class=" card w-100">
 
@@ -56,8 +56,8 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
                             </div>
 
                             <span><strong><?= date("d F Y H:i", strtotime($value['create_at'])) ?></strong></span>
-                            <p class="card-text text-center" id='resumido<?= $i ?>'><?= ResumirTexto::ResumirTexto($value['descricao'], 15, "<a class='small fst-italic' onclick='seeMore".$i."()'> ver mais</a>") ?></p>
-                            <p class="card-text d-none" id='completo<?=$i?>'>
+                            <p class="card-text text-center" id='resumido<?= $i ?>'><?= ResumirTexto::ResumirTexto($value['descricao'], 15, "<a class='small fst-italic' onclick='seeMore" . $i . "()'> ver mais</a>") ?></p>
+                            <p class="card-text d-none" id='completo<?= $i ?>'>
                                 <?= $value['descricao'] ?><a class='small fst-italic' onclick="seeLess<?= $i ?>()"> ver menos</a>
                             </p>
 
@@ -65,21 +65,22 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
                     </div>
                 </div>
                 <script>
-                    var resumido = document.querySelector('#resumido<?=$i?>');
-                    var completo = document.querySelector('#completo<?=$i?>');
-              function seeMore<?=$i?>() {
-                completo.classList.remove('d-none');
-                resumido.classList.add('d-none');
-                console.log(resumido);
-              }
-              function seeLess<?= $i ?>() {
-                // let resumido = document.querySelector('#resumido<?= $i ?>');
-                // let completo = document.querySelector('#completo<?= $i ?>');
-                completo.classList.add('d-none');
-                resumido.classList.remove('d-none');
-                // console.log(resumido);
-              }
-            </script>
+                    function seeMore<?= $i ?>() {
+                        let resumido = document.querySelector('#resumido<?= $i ?>');
+                        let completo = document.querySelector('#completo<?= $i ?>');
+                        completo.classList.remove('d-none');
+                        resumido.classList.add('d-none');
+                        console.log(resumido);
+                    }
+
+                    function seeLess<?= $i ?>() {
+                        let resumido = document.querySelector('#resumido<?= $i ?>');
+                        let completo = document.querySelector('#completo<?= $i ?>');
+                        completo.classList.add('d-none');
+                        resumido.classList.remove('d-none');
+                        // console.log(resumido);
+                    }
+                </script>
         <?php
             endforeach;
         endif;
