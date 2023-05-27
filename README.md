@@ -1,4 +1,4 @@
-# app_blog
+# Jornal Online
 
 ![preview](./public/img/jornal1.png)
 ![preview](./public/img/jornal2.jpg)
