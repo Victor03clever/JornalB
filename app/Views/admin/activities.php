@@ -22,8 +22,8 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATO
             </ol>
         </nav>
     </div><!-- End Page Title -->
-<?=Sessao::sms("act")?>
-<a href="<?=URL?>/activities" target="__blank" class="btn btn-primary mb-3"> Ver</a>
+    <?=Sessao::sms("act")?>
+    <a href="<?=URL?>/activities" target="__blank" class="btn btn-primary mb-3"> Ver</a>
 
     <div class="row">
     <div class="card">

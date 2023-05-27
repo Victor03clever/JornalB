@@ -58,6 +58,15 @@ class Activity
             return false;
         }
     }
+    public function getActR()
+    {
+        $this->db->query("SELECT * FROM atividade ORDER BY id DESC LIMIT 3");
+        if ($this->db->executa() and $this->db->total()) {
+            return $this->db->resultados();
+        } else {
+            return false;
+        }
+    }
     public function getOne($id)
     {
         $this->db->query("SELECT * FROM atividade WHERE id=:id");

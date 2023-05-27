@@ -57,6 +57,15 @@ class News
             return false;
         }
     }
+    public function getNewsR()
+    {
+        $this->db->query("SELECT * FROM noticia ORDER BY id DESC LIMIT 3");
+        if ($this->db->executa() and $this->db->total()) {
+            return $this->db->resultados();
+        } else {
+            return false;
+        }
+    }
     public function getOne($id)
     {
         $this->db->query("SELECT * FROM noticia WHERE id=:id");

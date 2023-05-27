@@ -52,7 +52,6 @@ use App\Helpers\Go;
 
                   <div class="pt-4 pb-2">
                     <h5 class="text-center pb-0 fs-3" style="color: #0070BA;"><span class="ityped"></span></h5>
-                    <p class="text-center small">Entre com tipo de usuário e a senha para Logar</p>
                   </div>
 
                   <form class="row g-3" action="<?=URL?>/admin/login" method="post">
@@ -78,9 +77,7 @@ use App\Helpers\Go;
                     <div class="col-12">
                       <button class="btn w-100 btn-primary" type="submit" name="btn-login" value="submit">Login</button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Não está cadastrado? <a href="cadastro.html">Cadastre-se</a></p>
-                    </div>
+                   
                   </form>
 
                 </div>
@@ -88,7 +85,7 @@ use App\Helpers\Go;
 
               <div class="credits">
 
-                Designed by <a href="#">Victor_Clever</a>
+                Made by <a href="#">Victor Clever</a>
               </div>
 
             </div>

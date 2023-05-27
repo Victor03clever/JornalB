@@ -25,15 +25,15 @@ use App\Helpers\Go;
                 <ul>
                     <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/home">Página Inicial</a></li>
                     <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/about">Sobre</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/courses">Atividades Escolares</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/trainers">Avisos</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/events">Notícias</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/activities">Atividades Escolares</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/notices">Avisos</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/news">Notícias</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
                 <ul>
-                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/pricing">Passatempo</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/events">Passatempo</a></li>
                     <li><i class="bx bx-chevron-right"></i> <a href="<?=URL?>/contact">Contatos</a></li>
                 </ul>
             </div>

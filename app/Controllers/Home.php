@@ -8,10 +8,19 @@ use App\Libraries\Controller;
 
 class Home extends Controller
 {
-    public function index(){
-        
-        
-    $this->view('home');
-        
+    private $News;
+    private $Act;
+    public function __construct()
+    {
+        $this->News = $this->model("News");
+        $this->Act = $this->model("Activity");
+    }
+    public function index()
+    {
+
+        $act=$this->Act->getActR();
+        $news=$this->News->getNewsR();
+      
+        $this->view('home',compact('act','news'));
     }
 }
